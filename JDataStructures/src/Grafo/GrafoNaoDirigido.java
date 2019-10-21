@@ -28,7 +28,7 @@ public class GrafoNaoDirigido extends Grafo{
 		grafo.addAresta(a5);
 		grafo.addAresta(a6);
 		grafo.addAresta(a7);
-		//grafo.addAresta(a8);
+		grafo.addAresta(a8);
 		grafo.addAresta(a9);
 		grafo.addAresta(a10);
 		grafo.addAresta(a11);
@@ -120,7 +120,7 @@ public class GrafoNaoDirigido extends Grafo{
 		return true;
 	}
 	
-	public boolean isSimples() {
+	private boolean isSimples() {
 		/*
 		  Um grafo é simples se ele não tem laços nem mais de uma aresta
 		  ligando dois vértices

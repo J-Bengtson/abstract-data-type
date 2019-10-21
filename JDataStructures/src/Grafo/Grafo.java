@@ -24,7 +24,7 @@ public abstract class Grafo {
 	}
 	
 	public boolean removeAresta(Aresta a) {
-		return getArestas().remove(a);
+		return getArestas().remove(a);  
 	}
 	
 	public abstract List<Aresta> getArestaAdjacente(Vertice v1 , Vertice v2); 
