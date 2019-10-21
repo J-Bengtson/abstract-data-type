@@ -4,12 +4,6 @@ import java.util.*;
 
 public abstract class Grafo {
 	
-	
-
-	
-	
-	
-	
 	private List<Vertice> V = new LinkedList<Vertice>();
 	private List<Aresta> A = new LinkedList<Aresta>();
 	
@@ -19,8 +13,13 @@ public abstract class Grafo {
 			vertice.setVisited(isVisited);
 	}
 	
-	
 	public boolean addAresta(Aresta a) {
+		List<Vertice> vertices = getVertices();
+		if(!vertices.contains(a.getV1()))
+			addVertice(a.getV1());
+		if(!vertices.contains(a.getV2()))
+			addVertice(a.getV2());
+		
 		return getArestas().add(a);
 	}
 	
@@ -28,10 +27,19 @@ public abstract class Grafo {
 		return getArestas().remove(a);
 	}
 	
-	public abstract List<Aresta> getArestaAdjacente(Vertice v1 , Vertice v2);
+	public abstract List<Aresta> getArestaAdjacente(Vertice v1 , Vertice v2); 
+	// funcao retorna lista de arestas adjancentes entre ambos vertices v1 e v2
+	
+	public abstract List<Vertice> getVerticesAdjacentes(Vertice v); 
+	// funçao retorna lista de vertices adjancentes de v
+
 	
 	public boolean isEquals(Vertice v1 , Vertice v2) {
 		return v1.equals(v2);
+	}
+	
+	public boolean isEquals(Aresta a1 , Aresta a2) {
+		return a1.equals(a2);
 	}
 	
 	
@@ -46,7 +54,6 @@ public abstract class Grafo {
 	
 	
 	
-	public abstract List<Vertice> getVerticesAdjacentes(Vertice v);
 	
 	public boolean isAdjacente(Vertice v1 , Vertice v2) {
 		
@@ -61,13 +68,20 @@ public abstract class Grafo {
 	}
 	
 	
+	
 	public List<Aresta> DFS(Vertice vertice) {
 		
-		List<Aresta> tmp = new LinkedList<Aresta>();
-		vertice.setVisited(true);
+		/*
+		 Algoritmo busca em profundidade : as arestas de árvore são exploradas a partir do vértice v mais
+		 recentemente descoberto que ainda possui arestas não exploradas saindo dele e por fim retornada.
+		 */
+		
+		
+		List<Aresta> tmp = new LinkedList<Aresta>(); //cria-se estrutura de dados para indexar arestas de arvore
+		vertice.setVisited(true); //seta v como visitado
 
 		
-		for( Vertice adj : getVerticesAdjacentes(vertice))
+		for( Vertice adj : getVerticesAdjacentes(vertice))// percorre e adiciona na lista todos os vertices adjacentes de v recursivamente
 			if(!adj.isVisited()) {
 				tmp.add(this.getArestaAdjacente(vertice, adj).get(0));
 				List<Aresta> arvore = DFS(adj);
