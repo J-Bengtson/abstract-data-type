@@ -14,8 +14,8 @@ class GrafoNaoDirigidoTest extends TestCase {
 assertEquals(): Testa igualdade entre dois objetos (esperado x retornado).
 assertFalse(): Testa Retorno booleano FALSO.
 assertTrue(): Testa Retorno booleano VERDADEIRO.
-assertNotNull(): Testa se um valor de um objeto NÃO está NULO.
-assertNull(): Testa se um valor de um objeto está NULO.
+assertNotNull(): Testa se um valor de um objeto Nï¿½O estï¿½ NULO.
+assertNull(): Testa se um valor de um objeto estï¿½ NULO.
 	 */
 	
 	
@@ -38,19 +38,13 @@ assertNull(): Testa se um valor de um objeto está NULO.
 		
 	}
 	
-	@Test
 	public void testGetGrau() {
 		TestCase.assertEquals( grafo.getGrau(v1), 2);
 		TestCase.assertEquals( grafo.getGrau(v2), 2);
 		TestCase.assertEquals( grafo.getGrau(v3), 2);
 	}
 
-	@Test
-	void test() {
-		testGetGrau();
-		
-	}
-	
+
 	
 	public void testIsRegular() {
 		
@@ -60,6 +54,49 @@ assertNull(): Testa se um valor de um objeto está NULO.
 	
 	public void testIsConexo() {
 		GrafoNaoDirigido GNaoConexo = new GrafoNaoDirigido() ,  GConexo = new GrafoNaoDirigido();
+		
+	}
+	
+	
+	@Test
+	public void testIsEuleriano() {
+		
+		GrafoNaoDirigido euleriano = new GrafoNaoDirigido();
+		
+		Vertice a = new Vertice("a"),
+				b = new Vertice("b"),
+				c = new Vertice("c"),
+				d = new Vertice("d"),
+				e = new Vertice("e");
+		
+		Aresta a1 = new Aresta(a , b),
+			   a2 = new Aresta(a , d),
+			   a3 = new Aresta( b , c),
+			   a4 = new Aresta( b , c),
+			   a5 = new Aresta(b , e),
+			   a6 = new Aresta(c , d ),
+			   a7 = new Aresta( c , d),
+			   a8 = new Aresta(d , e);
+		
+		euleriano.addAresta(a1);
+		euleriano.addAresta(a2);
+		euleriano.addAresta(a3);
+		euleriano.addAresta(a4);
+		euleriano.addAresta(a5);
+		euleriano.addAresta(a6);
+		euleriano.addAresta(a7);
+		euleriano.addAresta(a8);
+		
+		
+		System.out.println(euleriano.DFS_VisitaAresta(c));
+		System.out.println(euleriano.isEuleriano());
+		TestCase.assertEquals(true, euleriano.isEuleriano());
+		
+
+
+
+
+		
 		
 	}
 

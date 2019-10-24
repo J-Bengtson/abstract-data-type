@@ -62,9 +62,9 @@ public class GrafoNaoDirigido extends Grafo{
 
 	public boolean isRegular() {
 		/*
-		 * Um grafo regular é um grafo onde cada vértice tem o mesmo número de adjacências,
-		 *  i.e. cada vértice tem o mesmo grau ou valência. Um grafo direcionado regular também deve satisfazer
-		 *   a condição mais forte de que o grau de entrada e o grau de saída de cada vértice sejam iguais uns aos outros.
+		 * Um grafo regular ï¿½ um grafo onde cada vï¿½rtice tem o mesmo nï¿½mero de adjacï¿½ncias,
+		 *  i.e. cada vï¿½rtice tem o mesmo grau ou valï¿½ncia. Um grafo direcionado regular tambï¿½m deve satisfazer
+		 *   a condiï¿½ï¿½o mais forte de que o grau de entrada e o grau de saï¿½da de cada vï¿½rtice sejam iguais uns aos outros.
 		 */
 		int nAdj = this.getVerticesAdjacentes( this.getVertices().get(0) ).size();
 		for(Vertice vertice : getVertices()){
@@ -77,11 +77,11 @@ public class GrafoNaoDirigido extends Grafo{
 	
 	public boolean isConexo() {
 		/*
-		 * Grafo  é conexo se existir um caminho entre qualquer par de vértices. 
-		 *  Caso Contrário é desconexo – se há pelo menos um par de vértices que não está ligado a nenhuma cadeia (caminho).
+		 * Grafo  ï¿½ conexo se existir um caminho entre qualquer par de vï¿½rtices. 
+		 *  Caso Contrï¿½rio ï¿½ desconexo ï¿½ se hï¿½ pelo menos um par de vï¿½rtices que nï¿½o estï¿½ ligado a nenhuma cadeia (caminho).
 		 */
 		setAllVisited(false);
-		List<Objeto> arestasDeArvore = DFS_VisitaAresta(getVertices().get(0));
+		List<Objeto> dfs = DFS_VisitaAresta(getVertices().get(0));
 
 		
 		for( Vertice vertice : getVertices()) {
@@ -92,16 +92,17 @@ public class GrafoNaoDirigido extends Grafo{
 		
 		return true;
 	}
+
 	
 	public boolean isCompleto() {
 		/*
-		 Um grafo completo é um grafo simples 
-		 em que todo vértice é adjacente a todos os outros vértices.
+		 Um grafo completo ï¿½ um grafo simples 
+		 em que todo vï¿½rtice ï¿½ adjacente a todos os outros vï¿½rtices.
 		 */
 		if(isSimples())// verifica se grafo simples
 			for(Vertice verticeX : getVertices()) {
 				for(Vertice verticeY : getVertices()) {
-					//verifica se vertice é adjacente a todos os outros vertices (exceto a ele proprio)
+					//verifica se vertice ï¿½ adjacente a todos os outros vertices (exceto a ele proprio)
 					if( !isEquals(verticeX , verticeY) && !isAdjacente(verticeX, verticeY))
 						return false;
 				}
@@ -115,11 +116,11 @@ public class GrafoNaoDirigido extends Grafo{
 	
 	private boolean isSimples() {
 		/*
-		  Um grafo é simples se ele não tem laços nem mais de uma aresta
-		  ligando dois vértices
+		  Um grafo ï¿½ simples se ele nï¿½o tem laï¿½os nem mais de uma aresta
+		  ligando dois vï¿½rtices
 		*/
 		for(Aresta aresta : getArestas()) {
-			if( isEquals( aresta.getV1() , aresta.getV2() )) //verifica se ha laço
+			if( isEquals( aresta.getV1() , aresta.getV2() )) //verifica se ha laï¿½o
 					return false;
 		}
 		
@@ -149,6 +150,9 @@ public class GrafoNaoDirigido extends Grafo{
 
 	
 	public boolean isEuleriano() {
+		
+		if(!isConexo())
+			return false;
 		
 		for(Vertice vertice : getVertices()) {
 			if(getVerticesAdjacentes(vertice).size() % 2 != 0)

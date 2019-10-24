@@ -22,7 +22,7 @@ public class Aresta extends Objeto{
 	
 	@Override
 	public String toString() {
-		return "[Aresta "+this.getV1()+"--->"+this.getV2()+"]";
+		return "[Aresta "+this.getV1()+"------"+this.getV2()+"]";
 	}
 	
 }
