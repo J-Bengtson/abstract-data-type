@@ -37,7 +37,7 @@ public class GrafoNaoDirigido extends Grafo{
 		System.out.println("v1 eh Adjance a v3 : "+grafo.isAdjacente(v1, v3));
 		System.out.println("v1 grau eh"+grafo.getGrau(v1));
 		System.out.println("grafo eh regular"+grafo.isRegular());
-		System.out.println("dfs "+grafo.DFS(v6));
+		System.out.println("dfs "+grafo.DFS_VisitaAresta(v1));
 		System.out.println("grafo eh conexo "+grafo.isConexo());
 		System.out.println("grafo eh simples "+grafo.isSimples());
 		System.out.println("grafo eh completo "+grafo.isCompleto());
@@ -81,15 +81,8 @@ public class GrafoNaoDirigido extends Grafo{
 		 *  Caso Contrário é desconexo – se há pelo menos um par de vértices que não está ligado a nenhuma cadeia (caminho).
 		 */
 		setAllVisited(false);
-		List<Aresta> arestasDeArvore = DFS(getVertices().get(0));
-		setAllVisited(false);
-		
-		getVertices().get(0).setVisited(true);
-		
-		for(Aresta aresta : arestasDeArvore) {
-			aresta.getV1().setVisited(true);
-			aresta.getV2().setVisited(true);
-		}
+		List<Objeto> arestasDeArvore = DFS_VisitaAresta(getVertices().get(0));
+
 		
 		for( Vertice vertice : getVertices()) {
 			if(!vertice.isVisited()) {
@@ -147,13 +140,24 @@ public class GrafoNaoDirigido extends Grafo{
 	public List<Aresta> getArestaAdjacente(Vertice v1 , Vertice v2){
 		List<Aresta> tmp = new LinkedList<Aresta>();
 		for(Aresta aresta : getArestas()) {
-			if(isEquals(aresta.getV1() , v1) && isEquals(aresta.getV2() , v2)
-			||
-			isEquals(aresta.getV1() , v2) && isEquals(aresta.getV2() , v1))
+			if( (isEquals(aresta.getV1() , v1) && isEquals(aresta.getV2() , v2) )||
+			(isEquals(aresta.getV1() , v2) && isEquals(aresta.getV2() , v1)))
 				tmp.add(aresta);
 		}
 		return tmp;
 	}
 
+	
+	public boolean isEuleriano() {
+		
+		for(Vertice vertice : getVertices()) {
+			if(getVerticesAdjacentes(vertice).size() % 2 != 0)
+				return false;
+		}
+		
+		return true;
+	}
+	
+	
 
 }

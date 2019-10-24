@@ -36,7 +36,7 @@ public class GrafoDirigido extends Grafo{
 			
 			System.out.println("v1 eh Adjance a v3 : "+grafo.isAdjacente(v1, v3));
 			System.out.println("v1 grau eh"+grafo.getGrau(v1));
-			System.out.println("dfs "+grafo.DFS(v7));
+			System.out.println("dfs "+grafo.DFS_VisitaAresta(v7));
 		}
 	
 	

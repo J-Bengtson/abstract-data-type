@@ -1,23 +1,16 @@
 package Grafo;
 
-public class Aresta {
+public class Aresta extends Objeto{
 	
 	private Vertice v1 , v2; 
-	private Boolean isVisited;
 	
-	Aresta(Vertice v1 , Vertice v2 ){
+	Aresta(Vertice v1 , Vertice v2){
+		super();
 		this.v1 = v1;
 		this.v2 = v2;
-		this.isVisited = false;
 	}
-	
-	public Boolean isVisited() {
-		return this.isVisited;
-	}
-	
-	public void setIsVisited(Boolean isVisited) {
-		this.isVisited = isVisited;
-	}
+
+
 	
 	public Vertice getV1() {
 		return this.v1;

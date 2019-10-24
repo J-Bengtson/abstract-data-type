@@ -10,7 +10,7 @@ public abstract class Grafo {
 	
 	public void setAllVisited(Boolean isVisited) {
 		for(Vertice vertice : getVertices())
-			vertice.setVisited(isVisited);
+			vertice.setIsVisited(isVisited);
 	}
 	
 	public boolean addAresta(Aresta a) {
@@ -69,7 +69,7 @@ public abstract class Grafo {
 	
 	
 	
-	public List<Aresta> DFS(Vertice vertice) {
+	public List<Aresta> DFS_VisitaVertice(Vertice vertice) {
 		
 		/*
 		 Algoritmo busca em profundidade : as arestas de árvore são exploradas a partir do vértice v mais
@@ -78,18 +78,41 @@ public abstract class Grafo {
 		
 		
 		List<Aresta> tmp = new LinkedList<Aresta>(); //cria-se estrutura de dados para indexar arestas de arvore
-		vertice.setVisited(true); //seta v como visitado
+		vertice.setIsVisited(true); //seta v como visitado
 
 		
 		for( Vertice adj : getVerticesAdjacentes(vertice))// percorre e adiciona na lista todos os vertices adjacentes de v recursivamente
 			if(!adj.isVisited()) {
 				tmp.add(this.getArestaAdjacente(vertice, adj).get(0));
-				List<Aresta> arvore = DFS(adj);
+				List<Aresta> arvore = DFS_VisitaVertice(adj);
 				tmp.addAll(arvore);
 			}
 		
 		return tmp;
 	}
+	
+	
+	public List<Objeto> DFS_VisitaAresta (Vertice vertice){
+		
+		List<Objeto> tmp = new LinkedList<Objeto>();
+		tmp.add(vertice);
+		for( Vertice adj : getVerticesAdjacentes(vertice)) {
+			for(Aresta aresta : getArestaAdjacente(vertice, adj)) {
+				if(!aresta.isVisited()) {
+					tmp.add(aresta);
+					aresta.setIsVisited(true);
+					adj.setIsVisited(true);
+					List<Objeto> arvore = DFS_VisitaAresta(adj);
+					tmp.addAll(arvore);
+				}
+			}
+		}
+		return tmp;
+		
+	}
+
+	
+	
 	
 	
 					/** SETTERS & GETTERS **/

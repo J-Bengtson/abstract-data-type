@@ -1,23 +1,13 @@
 package Grafo;
 
-public class Vertice {
+public class Vertice extends Objeto{
 	private String id;
-	private Boolean isVisited;
 	
 	Vertice(String id){
+		super();
 		this.id = id;
-		this.isVisited = false;
 	}
-	
-	
-	public Boolean isVisited() {
-		return this.isVisited;
-	}
-	
-	public void setVisited(Boolean isVisited) {
-		this.isVisited = isVisited;
-	}
-	
+
 	public String getID() {
 		return this.id;
 	}
