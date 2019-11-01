@@ -2,7 +2,7 @@ package Grafo;
 
 import java.util.*;
 
-public class GrafoNaoDirigido extends Grafo{
+public class GrafoNaoDirigido extends Grafo implements GrafoNaoDirigidoImpl{
 
 	public static void main(String[] args) {
 		GrafoNaoDirigido grafo = new GrafoNaoDirigido();
@@ -37,7 +37,6 @@ public class GrafoNaoDirigido extends Grafo{
 		System.out.println("v1 eh Adjance a v3 : "+grafo.isAdjacente(v1, v3));
 		System.out.println("v1 grau eh"+grafo.getGrau(v1));
 		System.out.println("grafo eh regular"+grafo.isRegular());
-		System.out.println("dfs "+grafo.DFS_VisitaAresta(v1));
 		System.out.println("grafo eh conexo "+grafo.isConexo());
 		System.out.println("grafo eh simples "+grafo.isSimples());
 		System.out.println("grafo eh completo "+grafo.isCompleto());
@@ -77,15 +76,19 @@ public class GrafoNaoDirigido extends Grafo{
 	
 	public boolean isConexo() {
 		/*
-		 * Grafo  � conexo se existir um caminho entre qualquer par de v�rtices. 
-		 *  Caso Contr�rio � desconexo � se h� pelo menos um par de v�rtices que n�o est� ligado a nenhuma cadeia (caminho).
+		 * Grafo eh conexo se existir um caminho entre qualquer par de v�rtices. 
+		 *  Caso Contrario eh desconexo � se h� pelo menos um par de v�rtices que n�o est� ligado a nenhuma cadeia (caminho).
 		 */
-		setAllVisited(false);
-		List<Objeto> dfs = DFS_VisitaAresta(getVertices().get(0));
-
+		this.limpaVisitados();
 		
-		for( Vertice vertice : getVertices()) {
-			if(!vertice.isVisited()) {
+		DepthFirstSearcher DFSeacher = DFS();
+		
+		DFSeacher.DFS_VisitaVertice(this.getVertices().get(0));
+		
+		// aplica algoritmo dfs em qualquer vertice,
+		//se houver vertices nao visitadas significa que o grafo nao eh conexo
+		for( Vertice vertice : DFSeacher.getGrafo().getVertices()) {
+			if(!vertice.foiVisitado()) {
 				return false;
 			}
 		}
@@ -96,8 +99,8 @@ public class GrafoNaoDirigido extends Grafo{
 	
 	public boolean isCompleto() {
 		/*
-		 Um grafo completo � um grafo simples 
-		 em que todo v�rtice � adjacente a todos os outros v�rtices.
+		 Um grafo completo eh um grafo simples 
+		 em que todo vertice eh adjacente a todos os outros vertices.
 		 */
 		if(isSimples())// verifica se grafo simples
 			for(Vertice verticeX : getVertices()) {
@@ -116,7 +119,7 @@ public class GrafoNaoDirigido extends Grafo{
 	
 	private boolean isSimples() {
 		/*
-		  Um grafo � simples se ele n�o tem la�os nem mais de uma aresta
+		  Um grafo � simples se ele n�o tem lacos nem mais de uma aresta
 		  ligando dois v�rtices
 		*/
 		for(Aresta aresta : getArestas()) {
@@ -160,6 +163,73 @@ public class GrafoNaoDirigido extends Grafo{
 		}
 		
 		return true;
+	}
+
+
+
+	
+	
+	
+	
+
+	@Override
+	public boolean isIsolado() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public boolean isPendente(Vertice v1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public boolean isNulo() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public boolean isBipartido() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public Grafo getComplementar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public boolean isUnicursal() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public boolean hasCiclo() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

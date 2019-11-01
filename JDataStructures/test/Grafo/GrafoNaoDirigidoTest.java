@@ -18,9 +18,9 @@ assertNotNull(): Testa se um valor de um objeto N�O est� NULO.
 assertNull(): Testa se um valor de um objeto est� NULO.
 	 */
 	
-	
-	
+
 	private GrafoNaoDirigido grafo;
+	
 	private Vertice v1 = new Vertice("v1") ,
 			v2 = new Vertice("v2") , 
 			v3 = new Vertice("v3");
@@ -88,8 +88,7 @@ assertNull(): Testa se um valor de um objeto est� NULO.
 		euleriano.addAresta(a8);
 		
 		
-		System.out.println(euleriano.DFS_VisitaAresta(c));
-		System.out.println(euleriano.isEuleriano());
+ 		System.out.println(euleriano.isEuleriano());
 		TestCase.assertEquals(true, euleriano.isEuleriano());
 		
 

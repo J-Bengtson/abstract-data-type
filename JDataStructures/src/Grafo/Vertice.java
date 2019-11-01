@@ -1,10 +1,15 @@
 package Grafo;
 
-public class Vertice extends Objeto{
+public class Vertice implements Visitavel{
 	private String id;
+	private Boolean foiVisitado;
 	
+	
+	private Vertice(){
+		this.foiVisitado = false;
+	}
 	Vertice(String id){
-		super();
+		this();
 		this.id = id;
 	}
 
@@ -15,5 +20,20 @@ public class Vertice extends Objeto{
 	@Override
 	public String toString() {
 		return "Vertice "+id;
+	}
+
+	@Override
+	public void visita() {
+		this.setVisitado(true);
+	}
+
+	@Override
+	public boolean foiVisitado() {
+		return this.foiVisitado;
+	}
+
+	@Override
+	public void setVisitado(Boolean foiVisitado) {
+		this.foiVisitado = foiVisitado;
 	}
 }

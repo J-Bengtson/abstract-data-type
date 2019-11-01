@@ -3,7 +3,7 @@ package Grafo;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GrafoDirigido extends Grafo{
+public class GrafoDirigido extends Grafo implements GrafoDirigidoImpl{
 	
 		public static void main(String[] args) {
 			GrafoDirigido grafo = new GrafoDirigido();
@@ -36,7 +36,6 @@ public class GrafoDirigido extends Grafo{
 			
 			System.out.println("v1 eh Adjance a v3 : "+grafo.isAdjacente(v1, v3));
 			System.out.println("v1 grau eh"+grafo.getGrau(v1));
-			System.out.println("dfs "+grafo.DFS_VisitaAresta(v7));
 		}
 	
 	
@@ -61,6 +60,42 @@ public class GrafoDirigido extends Grafo{
 				// se primeira vertice for igual a v1 e segunda vertice for igual a v2 entao a aresta é adjancente a ambos
 				tmp.add(aresta);
 		return tmp;
+	}
+
+
+
+
+	@Override
+	public int getGrauEntrada(Vertice v1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+	@Override
+	public void ordenacaoTopologica() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public Grafo getTransposto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public boolean isFConexo() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

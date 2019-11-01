@@ -2,24 +2,31 @@ package Grafo;
 
 import java.util.*;
 
-public abstract class Grafo {
+public abstract class Grafo implements Cloneable {
 	
 	private List<Vertice> V = new LinkedList<Vertice>();
 	private List<Aresta> A = new LinkedList<Aresta>();
 	
 	
-	public void setAllVisited(Boolean isVisited) {
+	Grafo(){}
+	Grafo(Grafo grafo){
+		this.setArestas(grafo.getArestas());
+		this.setVertices(grafo.getVertices());
+	}
+
+	
+	private void setaVisitados(Boolean isVisited) {
 		for(Vertice vertice : getVertices())
-			vertice.setIsVisited(isVisited);
+			vertice.setVisitado(false);
 		
 		for(Aresta aresta : getArestas())
-			aresta.setIsVisited(isVisited);
+			aresta.setVisitado(false);
 	}
 	
-	protected void limpaVisitados() {
+	public void limpaVisitados() {
 		// seta todos as arestas e vertices previamente visitados com valor false
 		// para realizar nova busca sem conflitos
-		setAllVisited(false);
+		setaVisitados(false);
 	}
 	
 	
@@ -104,53 +111,10 @@ public abstract class Grafo {
 	public int getGrau(Vertice v) {
 		return this.getVerticesAdjacentes(v).size();
 	}
-	
-	
-	
-	public List<Aresta> DFS_VisitaVertice(Vertice vertice) {
-		
-		/*
-		 Algoritmo busca em profundidade : as arestas de �rvore s�o exploradas a partir do v�rtice v mais
-		 recentemente descoberto que ainda possui arestas n�o exploradas saindo dele e por fim retornada.
-		 */
-		
-		
-		List<Aresta> tmp = new LinkedList<Aresta>(); //cria-se estrutura de dados para indexar arestas de arvore
-		vertice.setIsVisited(true); //seta v como visitado
 
-		
-		for( Vertice adj : getVerticesAdjacentes(vertice))// percorre e adiciona na lista todos os vertices adjacentes de v recursivamente
-			if(!adj.isVisited()) {
-				tmp.add(this.getArestaAdjacente(vertice, adj).get(0));
-				List<Aresta> arvore = DFS_VisitaVertice(adj);
-				tmp.addAll(arvore);
-			}
-		
-		return tmp;
-	}
 	
-	
-	public List<Objeto> DFS_VisitaAresta (Vertice vertice){
-		
-		List<Objeto> tmp = new LinkedList<Objeto>();
-		/* cria-se estrtura de dados para indxar vertices e arestas visitadas */
-		tmp.add(vertice);/* add vertice a lista */
-		for( Vertice adj : getVerticesAdjacentes(vertice)) {
-			/* percorre todos os vertices adjacentes a v (adj) */
-			for(Aresta aresta : getArestaAdjacente(vertice, adj)) {
-				/* visita todas as arestas entre v e vertices adjacentes a v(adj) */
-				if(!aresta.isVisited()){ /* verifica se aresta foi visitada */
-					tmp.add(aresta); /* add aresta a lista */
-					tmp.add(adj); /* add vertice a lista */
-					aresta.setIsVisited(true);/* seta aresta como visitado */
-					adj.setIsVisited(true); /* seta vertice como visitado */
-					List<Objeto> dfs = DFS_VisitaAresta(adj);/* recursivamente visita todas as arestas nao visitadas adjacentes (profundidade) e as indexa em lista  */
-					tmp.addAll(dfs); /* junta as listas */
-				}
-			}
-		}
-		return tmp; //retorna lista
-		
+	public DepthFirstSearcher DFS() {
+		return new DepthFirstSearcher(this);
 	}
 
 	
@@ -180,6 +144,14 @@ public abstract class Grafo {
 		A = a;
 	}
 	
+	Grafo getClone() {
+		try {
+			return (Grafo) super.clone();
+		}catch( CloneNotSupportedException e) {
+			
+		}
+		return null;
+	}
 	
 	
 	
