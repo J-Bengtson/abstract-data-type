@@ -88,7 +88,11 @@ public abstract class Grafo implements Cloneable {
 	}
 	
 	
-	
+	public void addVertices(List<Vertice> vertices) {
+		for( Vertice v : vertices ) {
+			this.addVertice(v);
+		}
+	}
 	public boolean addVertice(Vertice v) {
 		return getVertices().add(v);	
 	}

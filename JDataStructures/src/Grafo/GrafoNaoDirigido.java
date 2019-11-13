@@ -40,6 +40,8 @@ public class GrafoNaoDirigido extends Grafo implements GrafoNaoDirigidoImpl{
 		System.out.println("grafo eh conexo "+grafo.isConexo());
 		System.out.println("grafo eh simples "+grafo.isSimples());
 		System.out.println("grafo eh completo "+grafo.isCompleto());
+		System.out.println("arestas do grafo : " +grafo.getArestas());
+		System.out.println("arestas do grafo complementar : " +grafo.getComplementar().getArestas());
 	}
 	
 	
@@ -166,16 +168,10 @@ public class GrafoNaoDirigido extends Grafo implements GrafoNaoDirigidoImpl{
 	}
 
 
-
-	
-	
-	
-	
-
 	@Override
-	public boolean isIsolado() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isIsolado(Vertice v1) {
+		//Um vértice isolado é um vértice com grau zero, isto é, um vértice que não é um ponto final de toda a aresta.
+		return this.getVerticesAdjacentes(v1).size() == 0;
 	}
 
 
@@ -183,8 +179,8 @@ public class GrafoNaoDirigido extends Grafo implements GrafoNaoDirigidoImpl{
 
 	@Override
 	public boolean isPendente(Vertice v1) {
-		// TODO Auto-generated method stub
-		return false;
+		//Um vértice folha (também vértice pendente) é um vértice de grau um.
+		return this.getVerticesAdjacentes(v1).size() == 1;
 	}
 
 
@@ -192,8 +188,8 @@ public class GrafoNaoDirigido extends Grafo implements GrafoNaoDirigidoImpl{
 
 	@Override
 	public boolean isNulo() {
-		// TODO Auto-generated method stub
-		return false;
+		//grafo nulo ou o grafo vazio é o grafo sem arestas.		
+		return this.getArestas().size() == 0;
 	}
 
 
@@ -201,17 +197,34 @@ public class GrafoNaoDirigido extends Grafo implements GrafoNaoDirigidoImpl{
 
 	@Override
 	public boolean isBipartido() {
-		// TODO Auto-generated method stub
+		// grafo bipartido ou bigrafo é um grafo cujos vértices podem ser divididos em dois conjuntos
+		//disjuntos U e V tais que toda aresta conecta um vértice em U a um vértice em V;
+		List<Vertice> U = new LinkedList<Vertice>();
+		List<Vertice> V = new LinkedList<Vertice>();
+		
+		for( Aresta aresta : this.getArestas()) {
+			//aresta.getV1()
+		}
+		
 		return false;
 	}
 
 
 
 
+
 	@Override
 	public Grafo getComplementar() {
-		// TODO Auto-generated method stub
-		return null;
+		Grafo grafoComplementar = new GrafoNaoDirigido();
+		grafoComplementar.addVertices(this.getVertices());
+		for( Vertice v1 : grafoComplementar.getVertices()) {
+			for(Vertice v2 : grafoComplementar.getVertices()) {
+				if( !grafoComplementar.isEquals(v1, v2) && !(this.getArestaAdjacente(v1, v2).size() > 0)) {
+					grafoComplementar.addAresta(new Aresta(v1,v2));
+				}
+			}
+		}
+		return grafoComplementar;
 	}
 
 
