@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import junit.framework.TestCase;
 
-class GrafoNaoDirigidoTest extends TestCase {
+class GrafoNaoDirigidoTest extends TestCase{
 	
 	
 	/*
 assertEquals(): Testa igualdade entre dois objetos (esperado x retornado).
-assertFalse(): Testa Retorno booleano FALSO.
-assertTrue(): Testa Retorno booleano VERDADEIRO.
+assert(): Testa Retorno voido FALSO.
+assertTrue(): Testa Retorno voido VERDADEIRO.
 assertNotNull(): Testa se um valor de um objeto N�O est� NULO.
 assertNull(): Testa se um valor de um objeto est� NULO.
 	 */
@@ -90,13 +90,68 @@ assertNull(): Testa se um valor de um objeto est� NULO.
 		
  		System.out.println(euleriano.isEuleriano());
 		TestCase.assertEquals(true, euleriano.isEuleriano());
-		
+			
+	}
+ 
+	public void isAdjacente(Vertice v1, Vertice v2) {
 
+	}
 
+	
+	public void getGrau(Vertice v1) {
 
+	}
 
-		
-		
+	
+	public void isRegular() {
+
+	}
+
+	
+	public void isIsolado(Vertice v1) {
+
+	}
+
+	
+	public void isPendente(Vertice v1) {
+
+	}
+
+	
+	public void isNulo() {
+
+	}
+
+	
+	public void isCompleto() {
+
+	}
+
+	
+	public void isConexo() {
+
+	}
+
+	
+	public void isBipartido() {
+
+	}
+
+	
+	public void getComplementar() {
+	}
+
+	
+	public void isEuleriano() {
+
+	}
+
+	
+	public void isUnicursal() {
+
+	}
+
+	public void hasCiclo() {
 	}
 
 }

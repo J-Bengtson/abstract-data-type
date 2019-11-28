@@ -152,9 +152,13 @@ public abstract class Grafo implements Cloneable {
 		try {
 			return (Grafo) super.clone();
 		}catch( CloneNotSupportedException e) {
-			
+			return null;
 		}
-		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getArestas().toString();
 	}
 	
 	
