@@ -9,7 +9,7 @@ public class Arco extends Aresta{
 	
 	@Override
 	public String toString() {
-		return "[Arco "+this.getV1()+"----->"+this.getV2()+"]";
+		return "[Arco "+this.getV1()+"---"+ this.getGrau() +"--->"+this.getV2()+"]";
 	}
 
 }

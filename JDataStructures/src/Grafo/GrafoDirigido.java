@@ -5,6 +5,10 @@ import java.util.List;
 
 public class GrafoDirigido extends Grafo implements GrafoDirigidoImpl{
 	
+	GrafoDirigido(){
+		super();
+		this.setEhDirigido(true);
+	}
 	
 	@Override
 	public List<Vertice> getVerticesAdjacentes(Vertice v){

@@ -36,4 +36,7 @@ public class Vertice implements Visitavel{
 	public void setVisitado(Boolean foiVisitado) {
 		this.foiVisitado = foiVisitado;
 	}
+	public boolean compareTo(Vertice v1) {
+		return (this.equals(v1));
+	}
 }

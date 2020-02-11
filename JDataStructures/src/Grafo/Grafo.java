@@ -7,6 +7,15 @@ public abstract class Grafo implements Cloneable {
 	private List<Vertice> V = new LinkedList<Vertice>();
 	private List<Aresta> A = new LinkedList<Aresta>();
 	
+	private boolean ehDirigido = false;
+	
+	public boolean ehDirigido() {
+		return this.ehDirigido;
+	}
+	public void setEhDirigido(boolean ehDirigido) {
+		this.ehDirigido = ehDirigido;
+	}
+	
 	
 	Grafo(){}
 	Grafo(Grafo grafo){
