@@ -3,16 +3,52 @@ package Grafo;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.*;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 /*
- * Projected and implemented by: Júlio Bengtson Neves (J-Bengtson)
- * Projetado e implementado por: Júlio Bengtson Neves (J-Bengtson)
+ * Projected and implemented by: Jï¿½lio Bengtson Neves (J-Bengtson)
+ * Projetado e implementado por: Jï¿½lio Bengtson Neves (J-Bengtson)
  * Available on Github: github.com/J-Bengtson
  * 
  */
 
 public class GrafoVisualizador extends JFrame {
 
+public static void main(String[]args) {	
+	GrafoDirigido grafo = new GrafoDirigido();
+	
+	
+	Vertice v1 = new Vertice("v1") , v2 = new Vertice("v2") , v3 = new Vertice("v3") , v4 = new Vertice("v4") , v5 = new Vertice("v5") , v6 = new Vertice("v6") , v7 = new Vertice("v7");
+	
+	grafo.addVertice(v1);
+	grafo.addVertice(v2);
+	grafo.addVertice(v3);
+	grafo.addVertice(v4);
+	grafo.addVertice(v5);
+	grafo.addVertice(v6);
+	grafo.addVertice(v7);
+	
+	Aresta a1 = new Aresta(v1 , v2 , 5) , a2 = new Aresta(v2 , v3) , a3 = new Aresta(v2 , v5) , a4 = new Aresta(v3 , v6) , a5 = new Aresta(v4 , v1) , 
+	a6 = new Aresta(v5 , v4) , a7 = new Aresta(v5 , v6) , a8 = new Aresta(v6 , v3) , a9 = new Aresta(v7 , v4) , a10 = new Aresta(v7 , v5) , a11 = new Aresta(v7 , v6);
+	
+	grafo.addAresta(a1);
+	grafo.addAresta(a2);
+	grafo.addAresta(a3);
+	grafo.addAresta(a4);
+	grafo.addAresta(a5);
+	grafo.addAresta(a6);
+	grafo.addAresta(a7);
+	grafo.addAresta(a8);
+	grafo.addAresta(a9);
+	grafo.addAresta(a10);
+	grafo.addAresta(a11);
+	
+	
+	new GrafoVisualizador(grafo);
+}
+	
+	
 	/**
 	 * 
 	 */
@@ -20,14 +56,22 @@ public class GrafoVisualizador extends JFrame {
 	
 	
 	private static final int WIDTH = 400 , HEIGHT = 400;
-	
+	private JCanvas JCanvas;
 	GrafoVisualizador(Grafo grafo){
 		super("Grafo Visualizador");
 		this.setSize(WIDTH, HEIGHT);
 		this.setAlwaysOnTop(true);
 		
-		//System.out.println(graph.getVertex().size());
-		this.getContentPane().add(new JCanvas(grafo));
+		
+		this.getContentPane().setLayout(new BorderLayout());
+		this.getContentPane().add( JCanvas = new JCanvas(grafo) , BorderLayout.CENTER);
+		
+		JButton randomButton = new JButton("<>");
+		this.getContentPane().add(randomButton , BorderLayout.SOUTH);
+		
+		randomButton.addActionListener( e -> {
+			JCanvas.repaint();
+		});
 
 		
 		this.setVisible(true);
@@ -114,12 +158,11 @@ public class GrafoVisualizador extends JFrame {
             
             double dx = (x2 - x1), dy = y2 - y1;
             double angle = Math.atan2(dy, dx);
-            int len = (int) Math.sqrt(dx*dx + dy*dy);
+            int len = (int) Math.sqrt(dx*dx + dy*dy) - 5;
             AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
             at.concatenate(AffineTransform.getRotateInstance(angle));
             g.transform(at);
 
-            // Draw horizontal arrow starting in (0, 0)
             g.drawLine(0, 0, len, 0);
             g.fillPolygon(new int[] {len + 4, len-ARR_SIZE - 2, len-ARR_SIZE - 2, len + 4},
                           new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);

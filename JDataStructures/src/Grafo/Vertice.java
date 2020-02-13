@@ -1,6 +1,6 @@
 package Grafo;
 
-public class Vertice implements Visitavel{
+public class Vertice implements Visitavel, Comparable{
 	private String id;
 	private Boolean foiVisitado;
 	
@@ -39,4 +39,12 @@ public class Vertice implements Visitavel{
 	public boolean compareTo(Vertice v1) {
 		return (this.equals(v1));
 	}
+	
+	@Override
+	public int compareTo(Object otherVertex) {
+		if(this.getID().equals(((Vertice) otherVertex).getID()))
+			return 0;
+		return -1;
+	}
+	
 }
